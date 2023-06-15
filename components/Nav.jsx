@@ -6,20 +6,21 @@ import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 function Nav() {
-  const isUserLoggedIn = true;
+  const {data: session} = useSession();
+
   const [providers, setProviders] = useState(null);
   const [toggleDropDown, setToggleDropDown] = useState(false)
 
   //get Providers irá deixar logarmos com google e next-Auth
-  // useEffect(() => {
-  //   const setProviders = async () => {
-  //     const response = await getProviders();
+  useEffect(() => {
+    const setUpProviders = async () => {
+      const response = await getProviders();
 
-  //     setProviders(response);
-  //   };
+      setProviders(response);
+    };
 
-  //   setProviders();
-  // }, []);
+    setUpProviders();
+  }, []);
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -36,7 +37,7 @@ function Nav() {
 
       {/* Desktop */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           // SingIn
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
@@ -49,7 +50,7 @@ function Nav() {
 
             <Link href="/profile">
               <Image
-                src="/assets/images/logo.svg"
+                src={session?.user?.image}
                 width={40}
                 height={40}
                 className="rounded-full"
@@ -66,7 +67,7 @@ function Nav() {
                 <button
                   type="button"
                   key={provider.name}
-                  onclick={() => signIn(provider.id)}
+                  onClick={() => signIn(provider.id)}
                   className="black_btn"
                 >
                   Logar
@@ -78,10 +79,10 @@ function Nav() {
 
       {/* Mobile */}
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-                src="/assets/images/logo.svg"
+                src={session?.user?.image}
                 width={40}
                 height={40}
                 className="rounded-full cursor-pointer"
@@ -107,7 +108,7 @@ function Nav() {
                   <button
                     type="button"
                     className="mt-5 w-full black_btn"
-                    onCLick={() => {
+                    onClick={() => {
                       setToggleDropDown(false);
                       signOut();
                     }}
@@ -124,7 +125,7 @@ function Nav() {
                 <button
                   type="button"
                   key={provider.name}
-                  onclick={() => signIn(provider.id)}
+                  onClick={() => signIn(provider.id)}
                   className="black_btn"
                 >
                   Logar

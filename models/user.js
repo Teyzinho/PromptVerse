@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     },
     username:{
         type:String,
-        require: [true, 'Email requerido!'],
+        require: [true, 'Username requerido!'],
         match: [/^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalido, deve ter 3-20 letras e ser unico!"]
     },
     Image:{

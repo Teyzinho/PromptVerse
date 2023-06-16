@@ -10,43 +10,45 @@ const handler = NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         })
     ],
-
-     // Função chamada ao criar ou atualizar uma sessão do usuário
-    async session({ session }) {
-         // Buscando o usuário no banco de dados com base no email da sessão
-        const sessionUser = await User.findOne({
-            email: session.user.email
-        })
-
-        // Definindo o ID do usuário na sessão
-        session.user.id = sessionUser._id.toString();
-
-        return session;
-    },
-    // Função chamada ao efetuar o login do usuário
-    async signIn({ profile }) {
-        try{
-            await connectToDB();// Conectando ao banco de dados
-            //checar se o usuário existe
-            const userExists = await User.findeOne({
-                email: profile.email
+    callbacks: {
+        // Função chamada ao criar ou atualizar uma sessão do usuário
+        async session({ session }) {
+            // Buscando o usuário no banco de dados com base no email da sessão
+            const sessionUser = await User.findOne({
+                email: session.user.email
             })
 
-            //se não existir, cria um novo usuário
-            if(!userExists){
-                await User.create({
-                    email: profile.email,
-                    username: profile.name.replace(" ", "").toLowerCase(),
-                    image: profile.picture
-                })
-            }
+            // Definindo o ID do usuário na sessão
+            session.user.id = sessionUser._id.toString();
 
-            return true;
-        }catch(error){
-            console.log("error signIn profile", error);
-            return false;
+            return session;
+        },
+        // Função chamada ao efetuar o login do usuário
+        async signIn({ profile }) {
+            try {
+                await connectToDB();// Conectando ao banco de dados
+                //checar se o usuário existe
+                const userExists = await User.findOne({
+                    email: profile.email
+                })
+
+                //se não existir, cria um novo usuário
+                if (!userExists) {
+                    await User.create({
+                        email: profile.email,
+                        username: profile.name.replace(" ", "").toLowerCase(),
+                        image: profile.picture
+                    })
+                }
+
+                return true;
+            } catch (error) {
+                console.log("error signIn profile", error);
+                return false;
+            }
         }
-    }
+    },
+
 })
 
 // Exportando o handler para ser usado nas rotas GET e POST

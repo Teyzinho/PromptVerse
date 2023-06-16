@@ -1,18 +1,18 @@
 import { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema({
-    email:{
-        type:String,
-        unique: [true, 'Email ja existe!'],
-        require: [true, 'Email requerido!'],
+    email: {
+        type: String,
+        unique: [true, 'Email já existe!'],
+        required: [true, 'Email requerido!'],
     },
-    username:{
-        type:String,
-        require: [true, 'Username requerido!'],
-        match: [/^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalido, deve ter 3-20 letras e ser unico!"]
+    username: {
+        type: String,
+        required: [true, 'Username requerido!'],
+        match: [/^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username inválido, deve ter 3-20 letras e ser único!"]
     },
-    Image:{
-        type: String
+    image: {
+        type: String,
     }
 });
 

@@ -12,6 +12,19 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         onSubmit={handleSubmit}
         className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
       >
+        <label>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
+            Titulo
+          </span>
+
+          <input
+            value={post.title}
+            onChange={(e) => setPost({ ...post, title: e.target.value })}
+            placeholder="Titulo"
+            required
+            className="form_input"
+          />
+        </label>
         <label >
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Sua Prompt AI

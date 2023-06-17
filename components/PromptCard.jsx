@@ -11,6 +11,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleCopy = () => {
     setCopied(post.prompt);
@@ -26,9 +27,6 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
   }
-
-  console.log("session id :",session.user.id)
-  console.log("postId id :",post.creator._id)
   
   return (
     <div className="prompt_card">

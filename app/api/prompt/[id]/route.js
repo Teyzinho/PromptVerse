@@ -14,7 +14,7 @@ export const GET = async (req, { params }) => {
 }
 
 export const PATCH = async (request, { params }) => {
-    const { prompt, tag } = await request.json(); // Extrai os valores de 'prompt' e 'tag' do corpo da requisição
+    const { title, prompt, tag } = await request.json(); // Extrai os valores de 'prompt' e 'tag' do corpo da requisição
 
     try {
         await connectToDB(); 
@@ -22,6 +22,7 @@ export const PATCH = async (request, { params }) => {
         const existingPrompt = await Prompt.findById(params.id); // Encontra o prompt existente pelo ID fornecido em params.id
         if (!existingPrompt) return new Response("Prompt not found", { status: 404 }) 
 
+        existingPrompt.title = title;
         existingPrompt.prompt = prompt; // Atualiza a propriedade 'prompt' do prompt existente com o novo valor
         existingPrompt.tag = tag; // Atualiza a propriedade 'tap' do prompt existente com o novo valor
 

@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@components/Form";
 
@@ -11,6 +10,7 @@ const UpdatePrompt = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
+    title:"",
     prompt: "",
     tag: "",
   });
@@ -21,6 +21,7 @@ const UpdatePrompt = () => {
       const data = await response.json();
 
       setPost({
+        title: data.title,
         prompt: data.prompt,
         tag: data.tag,
       });
@@ -39,6 +40,7 @@ const UpdatePrompt = () => {
       const response = await fetch(`/api/prompt/${promptId}`, {
         method: "PATCH",
         body: JSON.stringify({
+          title: post.title,
           prompt: post.prompt,
           tag: post.tag,
         }),

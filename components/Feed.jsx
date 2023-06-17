@@ -8,7 +8,7 @@ const PromptCardList = ({data, handleTagClick}) =>{
     <div className='mt-16 prompt_layout'>
       {data.map((post) => (
         <PromptCard
-          key={post.id}
+          key={post._id}
           post={post}
           handleTagClick={handleTagClick}
         />
@@ -20,9 +20,12 @@ const PromptCardList = ({data, handleTagClick}) =>{
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
+  const [filterPosts,setFilterPosts] = useState([])
 
   const handleSearchChange = (e) => {
+    setSearchText(e.target.value)
 
+    console.log(posts)
   }
 
   useEffect(() => {

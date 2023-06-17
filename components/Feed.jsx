@@ -1,11 +1,11 @@
 "use client";
 
-import {useState, useEffect} from 'react'
-import PromptCard from "./PromptCard"
+import { useState, useEffect } from "react";
+import PromptCard from "./PromptCard";
 
-const PromptCardList = ({data, handleTagClick}) =>{
-  return(
-    <div className='mt-16 prompt_layout'>
+const PromptCardList = ({ data, handleTagClick }) => {
+  return (
+    <div className="mt-16 prompt_layout">
       {data.map((post) => (
         <PromptCard
           key={post._id}
@@ -14,50 +14,67 @@ const PromptCardList = ({data, handleTagClick}) =>{
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
 const Feed = () => {
+  const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [posts, setPosts] = useState([]);
-  const [filterPosts,setFilterPosts] = useState([])
-
-  const handleSearchChange = (e) => {
-    setSearchText(e.target.value)
-
-    console.log(posts)
-  }
+  const [filterPosts, setFilterPosts] = useState([]);
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await fetch('/api/prompt');
+      const response = await fetch("/api/prompt");
       const data = await response.json();
 
-      setPosts(data);
-    }
+      setAllPosts(data);
+    };
 
     fetchPost();
   }, []); //chama no inicio
 
+  const filterPost = (value) => {
+    const regex = new RegExp(value, "i"); // 'i' flag for case-insensitive search
+    return allPosts.filter(
+      (item) =>
+        regex.test(item.tag)
+    );
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+
+    const filteredPost = filterPost(e.target.value);
+    setFilterPosts(filteredPost);
+  };
+
+  const handleTagClick = (tag) =>{
+    setSearchText(tag)
+
+
+    const filteredPost = filterPost(tag);
+    setFilterPosts(filteredPost);
+  }
+
   return (
-    <section className='feed'>
-      <form className='relative w-full flex-center'>
-        <input 
-          type='text'
-          placeholder='Pesquisar prompts'
+    <section className="feed">
+      <form className="relative w-full flex-center">
+        <input
+          type="text"
+          placeholder="Pesquisar prompts"
           value={searchText}
           onChange={handleSearchChange}
           required
-          className='search_input peer'
+          className="search_input peer"
         />
       </form>
-
-      <PromptCardList
-        data={posts}
-        handleTagClick={() => {}}
-      />
+      {searchText ? (
+        <PromptCardList data={filterPosts} handleTagClick={handleTagClick} />
+      ) : (
+        <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
+      )}
     </section>
-  )
-}
+  );
+};
 
-export default Feed
+export default Feed;

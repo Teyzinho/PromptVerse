@@ -1,12 +1,18 @@
 "use client";
-import React from 'react';
+import React from "react";
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const Modal = ({ selectedPrompt, isOpen, handleCloseModal }) => {
+const Modal = ({
+  selectedPrompt,
+  isOpen,
+  handleCloseModal,
+  handleEdit,
+  handleDelete,
+}) => {
   console.log("selectedPrompt:", selectedPrompt);
 
   const [copied, setCopied] = useState("");
@@ -79,15 +85,12 @@ const Modal = ({ selectedPrompt, isOpen, handleCloseModal }) => {
           {/* Promppt */}
           <div className="modal-prompt">
             <div className="bg-slate-50 h-10 rounded-t border border-solid border-gray-200 flex justify-end items-center">
-              <div
-                className="copy_btn mr-5"
-                onClick={handleCopy}
-              >
+              <div className="copy_btn mr-5" onClick={handleCopy}>
                 <Image
                   src={
-                      copied === selectedPrompt.prompt
-                        ? "/assets/icons/tick.svg"
-                        : "/assets/icons/copy.svg"
+                    copied === selectedPrompt.prompt
+                      ? "/assets/icons/tick.svg"
+                      : "/assets/icons/copy.svg"
                   }
                   alt="copy-btn"
                   width={20}
@@ -95,14 +98,13 @@ const Modal = ({ selectedPrompt, isOpen, handleCloseModal }) => {
                 />
               </div>
             </div>
-            <div className="bg-slate-950 text-white p-6 rounded-b whitespace-pre-wrap">
+            <div className="bg-slate-950 text-white p-6 rounded-b whitespace-pre-wrap overflow-y-auto max-h-[600px]">
               {selectedPrompt.prompt}
             </div>
           </div>
 
           <p
             className="tag"
-            // onClick={() => handleTagClick && handleTagClick(selectedPrompt.tag)}
           >
             #{selectedPrompt.tag}
           </p>
@@ -111,14 +113,14 @@ const Modal = ({ selectedPrompt, isOpen, handleCloseModal }) => {
             pathName === "/profile" && (
               <div className="flex mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
                 <p
-                  className="font-inter text-sm green_gradient cursor-pointer"
-                  // onClick={handleEdit}
+                  className="font-inter text-sm text-green-600 cursor-pointer"
+                  onClick={handleEdit}
                 >
                   Editar
                 </p>
                 <p
-                  className="font-inter text-sm orange_gradient cursor-pointer"
-                  // onClick={handleDelete}
+                  className="font-inter text-sm text-red-600 cursor-pointer"
+                  onClick={handleDelete}
                 >
                   Deletar
                 </p>

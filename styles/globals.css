@@ -50,10 +50,10 @@
       hsla(215, 98%, 61%, 1) 0px,
       transparent 0%
     ),
-    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
-    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 97% 21%, rgb(114, 151, 254) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, rgb(230, 58, 253) 0px, transparent 50%),
     radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, rgb(149, 199, 228) 0px, transparent 50%),
     radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
     radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
   position: absolute;
@@ -189,14 +189,26 @@ text-black
 }
 
 .modal{
-  position: relative;
   width: 1200px;
+  height: fit-content;
   background-color: white;
   border-radius: 5px;
 
-  @apply p-8 flex flex-col
+  @apply p-8 flex flex-col overflow-y-scroll
 }
 
 .modal-prompt{
   @apply my-4 font-satoshi text-lg text-gray-700 h-full min-h-[250px];
+}
+
+.footer-links{
+  @apply flex flex-col gap-5
+}
+
+.footer-links h2{
+  @apply font-bold
+}
+
+.footer-links p{
+  @apply hover:underline decoration-1 cursor-pointer flex gap-3
 }

@@ -41,7 +41,8 @@ const Feed = () => {
     const regex = new RegExp(value, "i"); // 'i' flag for case-insensitive search
     return allPosts.filter(
       (item) =>
-        regex.test(item.tag)
+        regex.test(item.tag) ||
+        regex.test(item.title)
     );
   };
 
@@ -67,7 +68,7 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      <form className="relative w-full flex-center">
+      <form className="relative w-full flex justify-start">
         <input
           type="text"
           placeholder="Pesquisar prompts"

@@ -18,7 +18,9 @@ const RootLayout = ({ children }) => {
           </div>
           <main className="app">
             <Nav />
-            {children}
+            <div className="min-h-[700px] w-full">
+              {children}
+            </div>
             <Footer />
           </main>
         </Provider>

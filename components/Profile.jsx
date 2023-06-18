@@ -1,6 +1,18 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
+import Modal from "./Modal";
 
 const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
+  const handleOpenModal = (prompt) => {
+    if (prompt) setSelectedPrompt(prompt);
+    setIsOpen(!isOpen);
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedPrompt, setSelectedPrompt] = useState({});
+
   return (
     <section className="w-full">
       <h1 className="head_text text-left">
@@ -15,9 +27,18 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
             post={post}
             handleEdit={() => handleEdit && handleEdit(post)}
             handleDelete={() => handleDelete && handleDelete(post)}
+            handleOpenModal={handleOpenModal}
           />
         ))}
       </div>
+
+      <Modal
+        selectedPrompt={selectedPrompt}
+        isOpen={isOpen}
+        handleCloseModal={handleOpenModal}
+        handleEdit={() => handleEdit && handleEdit(selectedPrompt)}
+        handleDelete={() => handleDelete && handleDelete(selectedPrompt)}
+      />
     </section>
   );
 };

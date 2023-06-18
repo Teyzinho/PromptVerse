@@ -155,7 +155,8 @@ text-black
 
 /* PromptCard Component */
 .prompt_card {
-  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
+  @apply flex  break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full hover:bg-gray-200
+  cursor-pointer h-60 flex-col justify-between;
 }
 
 .flex-center {
@@ -172,4 +173,30 @@ text-black
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+.prompt-title{
+  @apply text-2xl font-semibold;
+}
+
+.tag{
+  @apply font-inter text-sm text-primary-blue cursor-pointer font-bold w-fit hover:underline decoration-1 ;
+}
+
+.modal-container{
+  background-color: rgba(0, 0, 0, 0.301);
+  @apply fixed h-screen w-screen  top-0 left-0 flex items-center justify-center
+}
+
+.modal{
+  position: relative;
+  width: 1200px;
+  background-color: white;
+  border-radius: 5px;
+
+  @apply p-8 flex flex-col
+}
+
+.modal-prompt{
+  @apply my-4 font-satoshi text-lg text-gray-700 h-full min-h-[250px];
 }

@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
+import Modal from "./Modal";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const PromptCardList = ({ data, handleTagClick, handleOpenModal }) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((post) => (
@@ -11,6 +12,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
           key={post._id}
           post={post}
           handleTagClick={handleTagClick}
+          handleOpenModal={handleOpenModal}
         />
       ))}
     </div>
@@ -21,6 +23,8 @@ const Feed = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filterPosts, setFilterPosts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedPrompt, setSelectedPrompt] = useState({});
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -56,6 +60,11 @@ const Feed = () => {
     setFilterPosts(filteredPost);
   }
 
+  const handleOpenModal = (prompt) => {
+    if(prompt)setSelectedPrompt(prompt)
+    setIsOpen(!isOpen);
+  }
+
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
@@ -69,10 +78,12 @@ const Feed = () => {
         />
       </form>
       {searchText ? (
-        <PromptCardList data={filterPosts} handleTagClick={handleTagClick} />
+        <PromptCardList data={filterPosts} handleTagClick={handleTagClick} handleOpenModal={handleOpenModal} />
       ) : (
-        <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
+        <PromptCardList data={allPosts} handleTagClick={handleTagClick} handleOpenModal={handleOpenModal}/>
       )}
+
+      <Modal selectedPrompt={selectedPrompt} isOpen={isOpen} handleCloseModal={handleOpenModal}/>
     </section>
   );
 };

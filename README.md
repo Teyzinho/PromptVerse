@@ -1,34 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PromptVerse
+O PromptVerse é um projeto de aplicação web que permite aos usuários compartilhar e visualizar prompts (sugestões) para inteligência artificial. Com uma interface amigável e intuitiva, os usuários podem explorar uma variedade de prompts postados por outros usuários e criar seus próprios prompts. O objetivo do PromptVerse é criar uma comunidade colaborativa para impulsionar a criatividade e a inovação na área de IA.
 
-## Getting Started
+# Recursos
+-Explorar uma coleção diversificada de prompts de IA compartilhados por outros usuários.
 
-First, run the development server:
+-Criar uma conta pessoal para interagir com a comunidade do PromptVerse.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+-Publicar e compartilhar prompts próprios com a comunidade.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-Pesquisar prompts específicos com base em palavras-chave.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Tecnologias Utilizadas
 
-## Learn More
+O PromptVerse foi desenvolvido utilizando as seguintes tecnologias:
 
-To learn more about Next.js, take a look at the following resources:
+- <img src="https://github.com/Teyzinho/PromptVerse/assets/103509649/7cf28afb-6e77-4e54-93bf-c1fe053402cb" width="25px" height="25px">Next.js: Um framework de desenvolvimento web em React que permite a criação de aplicativos web rápidos e eficientes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- <img src="https://github.com/Teyzinho/PromptVerse/assets/103509649/98d4fd75-d337-4435-a131-16ce76ae9414" width="25px" height="25px"> TailWind CSS: Uma biblioteca de classes CSS prontas para uso que permite estilizar rapidamente a interface do usuário com um design responsivo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- <img src="https://github.com/Teyzinho/PromptVerse/assets/103509649/6435d251-7ee9-4337-81ca-e94684687ac0" width="25px" height="25px"> MongoDB: Um banco de dados NoSQL utilizado para armazenar informações sobre os prompts, usuários e interações da comunidade.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Mongoose: Uma biblioteca do Node.js que simplifica a interação com o MongoDB e oferece um mapeamento de objetos do MongoDB para modelos JavaScript.

@@ -22,3 +22,5 @@ O PromptVerse foi desenvolvido utilizando as seguintes tecnologias:
 - <img src="https://github.com/Teyzinho/PromptVerse/assets/103509649/6435d251-7ee9-4337-81ca-e94684687ac0" width="25px" height="25px"> MongoDB: Um banco de dados NoSQL utilizado para armazenar informações sobre os prompts, usuários e interações da comunidade.
 
 - Mongoose: Uma biblioteca do Node.js que simplifica a interação com o MongoDB e oferece um mapeamento de objetos do MongoDB para modelos JavaScript.
+
+Projeto feito com aulas de JSmastery
